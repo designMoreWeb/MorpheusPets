@@ -91,7 +91,7 @@ nav ul #search-button {
     padding: 2px;
 }
 
-.logout, .login, .register {
+.logout {
     float: right;   
 }
 
@@ -99,81 +99,101 @@ nav ul #search-button {
     width: 80%;
     margin: 30px auto;
     overflow: hidden;
+	position: relative;
 }
 
-.profile-badge {
-    width: 100%;
-}
-
-.profile-badge img {
-    width: 200px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.profile-badge article {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.profile-badge h1 {
+#container h1 {
     font-size: 2em;   
     margin-bottom: 10px;
     color: #ff5722;
     font-weight: 800;
-    text-align: center;
 }
 
-.profile-badge p {
-    text-align: center;
+#container h2 {
+    font-size: 1em;  
+	margin-bottom: 5px;
+    color: #ff5722;
+    font-weight: 800;
 }
 
-
-.pet-container {
-    display: block;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    width: 100%;
-}
-
-.pet-container > h1 {
-    font-size: 2em;   
+.game_alert {
+	text-align: center;
+	font-size: 2em;   
     margin-bottom: 10px;
     color: #ff5722;
-    font-weight: 600; 
+    font-weight: 400;
 }
 
-.pet-badge {
-    background-color: #FFF;
-    margin: 40px;
-    position: relative;
-    overflow: hidden;
+.game_alert strong {
+	font-weight: 800;
+}
+
+.enemy-info {
+    list-style: none;
+}
+
+.enemy_petimg {
+    float: left;
+}
+
+.enemy_team {
+	text-align: center;
+	font-size: 14px;
+}
+
+.enemy_team img{
+	padding: 5px;
+	margin: 5px;
+	background-color: #FFF;
     width: auto;
-    -webkit-box-shadow: 1px 1px 1px 1px #ccc;
-    -mox-box-shadow: 1px 1px 1px 1px #ccc;
+	-webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    -moz-box-shadow: 1px 1px 1px 1px #ccc;
     box-shadow: 1px 1px 1px 1px #ccc;
 }
 
-.pet-badge img {
-    width: 250px;
-    float: left;
-    margin: 0px 15px 0px 0px;
+.enemy_stat {
+	float: right;
+	padding: 5px;
+	margin: 40px;
+	background-color: #FFF;
+    width: auto;
+	-webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    -moz-box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow: 1px 1px 1px 1px #ccc;
 }
 
-.pet-stats {
-    float: left;   
+.battlefield {
+	position: relative;
+	left: 0;
+	top: 0;
 }
 
-.pet-stats h1 {
-    text-transform: uppercase;
-    font-size: 1.5em;
-    padding-top: 15px;
+.battlefield img {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.pet-stats p {
-    margin: 10px; 
+.player_actions {
+	float: right;
+	padding: 5px;
+	margin: 40px;
+	background-color: #FFF;
+    width: auto;
+	-webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    -moz-box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow: 1px 1px 1px 1px #ccc;
+}
+
+.player_stats {
+	float: left;
+	padding: 5px;
+	margin: 40px;
+	background-color: #FFF;
+    width: auto;
+	-webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    -moz-box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow: 1px 1px 1px 1px #ccc;
 }
 
 .btn {
@@ -191,7 +211,12 @@ nav ul #search-button {
     font-size: 20px;
     padding: 10px 20px 10px 20px;
     text-decoration: none;
-    width: 150px;
+	text-align: center;
+    width: 175px;
+}
+
+.btn a {
+	color: #ffffff;
 }
 
 .btn:hover {

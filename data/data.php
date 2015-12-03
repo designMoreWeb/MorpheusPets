@@ -23,6 +23,7 @@
     private $addSpeciesStatement;
     private $getSpeciesStatement;
     private $getSpeciesByNameStatement;
+    private $getAllSpeciesStatement;
     private $updateSpeciesStatement;
 
     private static $instance;
@@ -52,7 +53,7 @@
         $grit       = $pet->getGrit();
         $active     = intval( $pet->isActive() );
 
-        $this->addPetStatement->bind_param( "iiiiiiiiiii", $owner_id, $species_id, $name, $experience, $brawn, $guts, $essence, $speed, $focus, $grit, $active );
+        $this->addPetStatement->bind_param( "iisiiiiiiii", $owner_id, $species_id, $name, $experience, $brawn, $guts, $essence, $speed, $focus, $grit, $active );
         if ( $this->addPetStatement->execute() )
         {
           $ret = $this->dbConnection->last_insert_id();
@@ -99,7 +100,7 @@
 
       $this->getPetStatement->bind_param( "i", $id );
       $this->getPetStatement->execute();
-      $this->getPetStatement->bind_result( $res_id, $owner_id, $species_id, $name, $experience, $brawn, $guts, $essence, $speed, $focus, $grit, $active, $username, $description, $species, $type, $stats );
+      $this->getPetStatement->bind_result( $res_id, $owner_id, $species_id, $name, $experience, $brawn, $guts, $essence, $speed, $focus, $grit, $active, $username, $email_address, $description, $species, $type, $stats );
 
       // Expecting only 1 result
       if ( $this->getPetStatement->fetch() )
@@ -165,7 +166,7 @@
 
       $this->getAllPetsForUserStatement->bind_param( "i", $id );
       $this->getAllPetsForUserStatement->execute();
-      $this->getAllPetsForUserStatement->bind_result( $res_id, $owner_id, $species_id, $name, $experience, $brawn, $guts, $essence, $speed, $focus, $grit, $active, $username, $description, $species, $type, $stats );
+      $this->getAllPetsForUserStatement->bind_result( $res_id, $owner_id, $species_id, $name, $experience, $brawn, $guts, $essence, $speed, $focus, $grit, $active, $username, $email_address, $description, $species, $type, $stats );
 
       while ( $this->getAllPetsForUserStatement->fetch() )
       {
@@ -229,7 +230,7 @@
 
       $this->getActivePetsForUserStatement->bind_param( "i", $id );
       $this->getActivePetsForUserStatement->execute();
-      $this->getActivePetsForUserStatement->bind_result( $res_id, $owner_id, $species_id, $name, $experience, $brawn, $guts, $essence, $speed, $focus, $grit, $active, $username, $description, $species, $type, $stats );
+      $this->getActivePetsForUserStatement->bind_result( $res_id, $owner_id, $species_id, $name, $experience, $brawn, $guts, $essence, $speed, $focus, $grit, $active, $username, $email_address, $description, $species, $type, $stats );
 
       while ( $this->getActivePetsForUserStatement->fetch() )
       {
@@ -468,6 +469,35 @@
     }
 
     /**
+     * Get all species
+     *
+     * @return array
+     */
+    public function getAllSpecies()
+    {
+      $ret = [ ];
+
+      // Species variables
+      $id      = null;
+      $species = null;
+      $type    = null;
+      $stats   = null;
+
+      $this->getAllSpeciesStatement->execute();
+      $this->getAllSpeciesStatement->bind_result( $id, $species, $type, $stats );
+
+      while ( $this->getAllSpeciesStatement->fetch() )
+      {
+        $newSpecies = new Species( $species, $type, $stats );
+        $newSpecies->setId( $id );
+
+        array_push( $ret, $newSpecies );
+      }
+
+      return $ret;
+    }
+
+    /**
      * MorpheusPetsData constructor.
      * Initialize prepared statements
      */
@@ -478,7 +508,7 @@
       $this->addPetStatement               = $this->dbConnection->prepare_statement( "INSERT INTO `user_pets` (`owner_id`, `species_id`, `name`, `experience`, `brawn`, `guts`, `essence`, `speed`, `focus`, `grit`, `active`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
       $this->getPetStatement               = $this->dbConnection->prepare_statement( "SELECT `user_pets`.`id`, `user_pets`.`owner_id`, `user_pets`.`species_id`, `user_pets`.`name`, `user_pets`.`experience`, `user_pets`.`brawn`, `user_pets`.`guts`, `user_pets`.`essence`, `user_pets`.`speed`, `user_pets`.`focus`, `user_pets`.`grit`, `user_pets`.`active`, `users`.`username`, `users`.`email_address`, `users`.`description`, `species`.`species`, `species`.`type`, `species`.`stats` FROM `user_pets` INNER JOIN `users` ON `user_pets`.`owner_id` = `users`.`id` INNER JOIN `species` ON `user_pets`.`species_id` = `species`.`id` WHERE `user_pets`.`id`=?" );
       $this->getAllPetsForUserStatement    = $this->dbConnection->prepare_statement( "SELECT `user_pets`.`id`, `user_pets`.`owner_id`, `user_pets`.`species_id`, `user_pets`.`name`, `user_pets`.`experience`, `user_pets`.`brawn`, `user_pets`.`guts`, `user_pets`.`essence`, `user_pets`.`speed`, `user_pets`.`focus`, `user_pets`.`grit`, `user_pets`.`active`, `users`.`username`, `users`.`email_address`, `users`.`description`, `species`.`species`, `species`.`type`, `species`.`stats` FROM `user_pets` INNER JOIN `users` ON `user_pets`.`owner_id` = `users`.`id` INNER JOIN `species` ON `user_pets`.`species_id` = `species`.`id` WHERE `users`.`id`=?" );
-      $this->getActivePetsForUserStatement = $this->dbConnection->prepare_statement( "SELECT `user_pets`.`id`, `user_pets`.`owner_id`, `user_pets`.`species_id`, `user_pets`.`name`, `user_pets`.`experience`, `user_pets`.`brawn`, `user_pets`.`guts`, `user_pets`.`essence`, `user_pets`.`speed`, `user_pets`.`focus`, `user_pets`.`grit`, `user_pets`.`active`, `users`.`username`, `users`.`email_address`, `users`.`description`, `species`.`species`, `species`.`type`, `species`.`stats` FROM `user_pets` INNER JOIN `users` ON `user_pets`.`owner_id` = `users`.`id` INNER JOIN `species` ON `user_pets`.`species_id` = `species`.`id` WHERE `user_pets`.`id`=? AND `user_pets`.`active`=TRUE" );
+      $this->getActivePetsForUserStatement = $this->dbConnection->prepare_statement( "SELECT `user_pets`.`id`, `user_pets`.`owner_id`, `user_pets`.`species_id`, `user_pets`.`name`, `user_pets`.`experience`, `user_pets`.`brawn`, `user_pets`.`guts`, `user_pets`.`essence`, `user_pets`.`speed`, `user_pets`.`focus`, `user_pets`.`grit`, `user_pets`.`active`, `users`.`username`, `users`.`email_address`, `users`.`description`, `species`.`species`, `species`.`type`, `species`.`stats` FROM `user_pets` INNER JOIN `users` ON `user_pets`.`owner_id` = `users`.`id` INNER JOIN `species` ON `user_pets`.`species_id` = `species`.`id` WHERE `user_pets`.`owner_id`=? AND `user_pets`.`active`=TRUE" );
       $this->updatePetStatement            = $this->dbConnection->prepare_statement( "UPDATE `user_pets` SET `name`=?, `experience`=?, `brawn`=?, `guts`=?, `essence`=?, `speed`=?, `focus`=?, `grit`=?, `active`=? WHERE `id`=?" );
 
       $this->addUserStatement           = $this->dbConnection->prepare_statement( "INSERT INTO `users` (`username`, `password_hash`, `email_address`, `description`) VALUES(?, ?, ?, ?)" );
@@ -489,6 +519,7 @@
       $this->addSpeciesStatement       = $this->dbConnection->prepare_statement( "INSERT INTO `species` (`species`, `type`, `stats`) VALUES(?, ?, ?)" );
       $this->getSpeciesStatement       = $this->dbConnection->prepare_statement( "SELECT * FROM `species` WHERE `id`=?" );
       $this->getSpeciesByNameStatement = $this->dbConnection->prepare_statement( "SELECT * FROM `species` WHERE `species`=?" );
+      $this->getAllSpeciesStatement    = $this->dbConnection->prepare_statement( "SELECT * FROM `species`" );
       $this->updateSpeciesStatement    = $this->dbConnection->prepare_statement( "UPDATE `species` SET `species`=?, `type`=?, `stats`=? WHERE `id`=?" );
     }
 
@@ -567,6 +598,10 @@
       if ( $this->getSpeciesByNameStatement )
       {
         $this->getSpeciesByNameStatement->close();
+      }
+      if ( $this->getAllSpeciesStatement )
+      {
+        $this->getAllSpeciesStatement->close();
       }
       if ( $this->updateSpeciesStatement )
       {
