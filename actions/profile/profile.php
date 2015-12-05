@@ -11,8 +11,11 @@
     // Get logged in user
     $loggedInUser = $session->getLoggedInUser();
 
+    // Get profile id
+    $profileId = $_GET['profileId'];
+
     //Get profile's user
-    $profileUser = $data->getUser($_GET['profileId']);
+    $profileUser = $data->getUser($profileId);
 
     if(!is_null($profileUser))
     {
@@ -21,6 +24,8 @@
 
         // Setup view model
         $viewModel = new Profile_ViewModel( $loggedInUser , $profileUser);
+
+        $viewModel->setPetCollection($pet_collection);
 
         /** @var Pet $pet */
         foreach ( $pet_collection as $pet )
@@ -41,5 +46,5 @@
     {
         //Setup view model
         $viewModel = new Error_ViewModel();
-        $viewModel->renderUserNotExist();
+        $viewModel->renderUserNotExist($profileId);
     }

@@ -80,11 +80,6 @@ nav > ul > li > a:hover {
     color: #ff5722;
 }
 
-nav ul form {
-    display: inline-block;
-    padding: 2px;
-}
-
 nav ul #search-bar {
     margin-left: 40px;
     display: inline-block;
@@ -96,211 +91,109 @@ nav ul #search-button {
     padding: 2px;
 }
 
-.logout, .login, .register {
-    float: right;
+.logout {
+    float: right;   
 }
 
 #container {
     width: 80%;
     margin: 30px auto;
     overflow: hidden;
+	position: relative;
 }
 
-.card {
-  background-color: #FFF;
-  margin: 10px;
-  overflow: hidden;
-  padding: 15px;
-  -webkit-box-shadow: 1px 1px 1px 1px #ccc;
-  -moz-box-shadow: 1px 1px 1px 1px #ccc;
-  box-shadow: 1px 1px 1px 1px #ccc;
+#container h1 {
+    font-size: 2em;   
+    margin-bottom: 10px;
+    color: #ff5722;
+    font-weight: 800;
 }
 
-.profile-badge {
-    width: 100%;
+#container h2 {
+    font-size: 1em;  
+	margin-bottom: 5px;
+    color: #ff5722;
+    font-weight: 800;
 }
 
-.profile-badge img {
-    width: 200px;
-    display: block;
+.game_alert {
+	text-align: center;
+	font-size: 2em;   
+    margin-bottom: 10px;
+    color: #ff5722;
+    font-weight: 400;
+}
+
+.game_alert strong {
+	font-weight: 800;
+}
+
+.enemy-info {
+    list-style: none;
+}
+
+.enemy_petimg {
+    float: left;
+}
+
+.enemy_team {
+	text-align: center;
+	font-size: 14px;
+}
+
+.enemy_team img{
+	padding: 5px;
+	margin: 5px;
+	background-color: #FFF;
+    width: auto;
+	-webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    -moz-box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow: 1px 1px 1px 1px #ccc;
+}
+
+.enemy_stat {
+	float: right;
+	padding: 5px;
+	margin: 40px;
+	background-color: #FFF;
+    width: auto;
+	-webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    -moz-box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow: 1px 1px 1px 1px #ccc;
+}
+
+.battlefield {
+	position: relative;
+	left: 0;
+	top: 0;
+}
+
+.battlefield img {
+	display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
-.profile-badge article {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.profile-badge h1 {
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.profile-badge p {
-    text-align: center;
-}
-
-
-.pet-container {
-    display: block;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    width: 100%;
-}
-
-.pet-container > h1 {
-    margin-bottom: 10px;
-}
-
-.pet-badge {
-    margin: 40px;
-    position: relative;
+.player_actions {
+	float: right;
+	padding: 5px;
+	margin: 40px;
+	background-color: #FFF;
     width: auto;
+	-webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    -moz-box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow: 1px 1px 1px 1px #ccc;
 }
 
-.pet-badge-active {
-    margin: 40px;
-    position: relative;
+.player_stats {
+	float: left;
+	padding: 5px;
+	margin: 40px;
+	background-color: #FFF;
     width: auto;
-    border: 2px solid #ff6f00;
-}
-
-.pet-badge img {
-    width: 150px;
-    float: left;
-    margin: 0px 15px 0px 0px;
-}
-
-.pet-badge-active img {
-    width: 150px;
-    float: left;
-    margin: 0px 15px 0px 0px;
-}
-
-.pet-stats {
-    float: left;
-}
-
-.pet-stats h2 {
-    text-transform: uppercase;
-    padding-top: 15px;
-}
-
-.pet-stats p {
-    margin: 10px;
-}
-
-.pet-stats tr, td{
-    padding: 5px;
-}
-
-.pet-editor-header,
-.login-header,
-.register-header {
-  margin-bottom: 10px;
-}
-
-.pet-editor-form {
-  width: 50%;
-  float: left;
-}
-
-.pet-editor-species-details-container {
-  position: relative;
-  width: 40%;
-  float: right;
-}
-
-.pet-editor-species-details-container h3 {
-  padding-top: 15px;
-  text-align: center;
-}
-
-.pet-editor-species-details-container img {
-  margin-left: auto;
-  margin-right: auto;
-  width: 250px;
-}
-
-.pet-stat-priority ol {
-  list-style: decimal inside;
-}
-
-.login-form,
-.register-form {
-  margin: 10px auto;
-  width: 50%;
-}
-
-#select-active {
-    display: none;
-}
-
-.description-edit {
-    display: none;
-}
-
-.pet-viewer-pet-badge h1 {
-  text-transform: uppercase;
-  text-align: center;
-}
-
-.pet-viewer-pet-badge img {
-
-  margin-left: auto;
-  margin-right: auto;
-  width: 250px;
-}
-
-.pet-viewer-pet-badge .pet-viewer-experience {
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
-.pet-viewer-stats-badge h2 {
-  text-align: center;
-}
-
-/* Forms */
-form {
-  margin-top: 10px;
-  position: relative;
-  overflow: hidden;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-control {
-  display: block;
-  width: 100%;
-  height: 34px;
-  padding: 6px 12px;
-  font-size: 14px;
-  color: #555;
-  background-color: #fff;
-  border: 1px solid #ff5722;
-  border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-  -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-}
-
-textarea.form-control {
-  height: auto;
-}
-
-label {
-  display: inline-block;
-  max-width: 100%;
-  margin-bottom: 5px;
-  font-weight: 700;
+	-webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    -moz-box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow: 1px 1px 1px 1px #ccc;
 }
 
 .btn {
@@ -318,11 +211,12 @@ label {
     font-size: 20px;
     padding: 10px 20px 10px 20px;
     text-decoration: none;
-    width: auto;
+	text-align: center;
+    width: 175px;
 }
 
-.btn a{
-    color: #ffffff;
+.btn a {
+	color: #ffffff;
 }
 
 .btn:hover {
@@ -335,51 +229,6 @@ label {
   text-decoration: none;
 }
 
-.small-btn {
-    background: #0066ff;
-    text-decoration: none;
-    color: #ffffff;
-    font-size: 0.85em;
-    border-radius: 5px;
-    width: auto;
-    padding: 5px;
-    display: inline-block;
-}
-
-.small-btn a{
-    color: #ffffff;
-}
-
-/* Text */
-h1 {
-  font-size: 2em;
-  color: #ff5722;
-  font-weight: 800;
-  margin-bottom: 10px;
-}
-
-h2 {
-  font-size: 1.5em;
-  color: #ff5722;
-  font-weight: 800;
-  margin-bottom: 8px;
-}
-
-h3 {
-  font-size: 1.25em;
-  color: #ff5722;
-  font-weight: 800;
-  margin-bottom: 6px;
-}
-
-.small {
-  font-size: 85%;
-}
-
-.text-error {
-  color: #d91812;
-}
-
 /* retina device detection */
 @media only screen and (min--moz-device-pixel-ratio: 2),
 only screen and (-o-min-device-pixel-ratio: 2/1),
@@ -390,11 +239,11 @@ only screen and (min-device-pixel-ratio: 2) {
 
 /* media queries */
 @media screen and (max-width: 1024px) {
-
+    
 }
 
 @media screen and (max-width: 768px) {
-
+    
 }
 
 @media screen and (max-width: 640px) {
