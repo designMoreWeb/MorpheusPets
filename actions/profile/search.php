@@ -13,7 +13,7 @@ $data    = MorpheusPetsData::getInstance();
 $loggedInUser = $session->getLoggedInUser();
 
 // Username searched
-$usernameSearched = StringUtils::sanitize($_POST['search']);
+$usernameSearched = StringUtils::sanitize($_GET['search']);
 
 //Get profile's user
 $profileUser = $data->getUserByUserName($usernameSearched);
@@ -28,10 +28,10 @@ else
 
     $ret = $data->getLikeUsers($usernameSearched);
 
-    if( !is_null($ret) )
+    if( !empty($ret) )
     {
         $viewModel = new Profile_ViewModel($loggedInUser, $profileUser);
-        $viewModel->renderSearchResults( $ret );
+        $viewModel->renderSearchResults( $ret , $usernameSearched );
     }
     else {
         //Setup view model
